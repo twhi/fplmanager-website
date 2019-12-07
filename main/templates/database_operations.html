@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% load static %} {% block styles %} {% endblock styles %}
+{% block content %}
+<h3>Database operations</h3>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" name="update_player_data">Update Player Database</button>
+    <button type="submit" name="pull_player_data">Get Player data from database</button>
+    <br>
+    <br>
+    <button type="submit" name="update_team_data">Update Team Database</button>
+    <button type="submit" name="pull_team_data">Get Team data from database</button>
+</form>
+<br>
+<hr>
+{% endblock content %}

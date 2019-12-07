@@ -1,0 +1,149 @@
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+h1,
+.navbar-brand {
+    font-family: 'Staatliches', 'cursive';
+}
+
+.main-text {
+    background-color: rgba(245, 245, 245, 0.85);
+}
+
+.text-link {
+    color: blue;
+}
+
+.text-link:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+a {
+    color: inherit;
+}
+
+a:hover {
+    color: grey;
+    text-decoration: none;
+}
+
+.hr-modal {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.hr-banner {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-top: 2px solid white;
+}
+
+hr {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.table-nonfluid {
+    width: auto !important;
+}
+
+.sim-col {
+    padding: 20px;
+}
+
+.analysis-option {
+    border-left: 1px solid #D3D3D3;
+    border-top: 1px hidden #D3D3D3;
+    margin-top: 50px;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .analysis-option {
+        border-left: 1px hidden #D3D3D3 !important;
+        border-top: 1px solid #D3D3D3 !important;
+    }
+}
+
+.left-analysis-option {
+    margin-top: 50px;
+    padding: 10px;
+}
+
+.intro-text {
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.navbar-login {
+    margin-left: 50px;
+}
+
+.navbar-nav,
+.navbar-brand li a {
+    line-height: 30px;
+}
+
+.btn-custom {
+    color: #ffffff;
+    background-color: #340068;
+    letter-spacing: 0.05em;
+}
+
+.btn-custom:hover,
+.btn-custom:active,
+.btn-custom:focus,
+.btn-custom.active {
+    background: grey;
+    color: #ffffff;
+}
+
+nav {
+    background-color: #340068;
+}
+
+.analysis-options {
+    color: #340068;
+}
+
+.landing-main {
+    background: url('../cover.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.landing-section {
+    min-height: 60vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.landing-section-content {
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.7);
+    width: 100vw;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #ccc;
+}
+
+.landing-section-text {
+    color: white;
+}
+
+.header {
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+}

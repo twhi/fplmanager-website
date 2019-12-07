@@ -1,0 +1,32 @@
+<h2>Your current lineup</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Player</th>
+            <th>Position</th>
+            <th>Team</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in request.session.current_lineup.lineup %}
+        <tr>
+            <td>{{ player.name }} ({{ player.team_name_short }})</td>
+            <td>{{ player.position }}</td>
+            <td>{{ player.team_name_short }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td><br /></td>
+            <td><br /></td>
+            <td><br /></td>
+        </tr>
+        {% for player in request.session.current_lineup.subs %}
+        <tr>
+            <td>{{ player.name }} ({{ player.team_name_short }})</td>
+            <td>{{ player.position }}</td>
+            <td>{{ player.team_name_short }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

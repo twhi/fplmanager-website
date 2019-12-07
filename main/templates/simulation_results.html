@@ -1,0 +1,54 @@
+<div class="simulation-results">
+    <h2>Simulation complete!</h2>
+    <div class="row">
+        <div class="col-xl-5 col-md-5">
+            <table class="table table-nonfluid">
+                <thead>
+                    <th>Player Out</th>
+                    <th></th>
+                    <th>Player In</th>
+                </thead>
+                <tbody>
+                    {% for outbound, inbound in subs %}
+                    <tr>
+                        <td>{{ outbound.name }} ({{ outbound.team_name_short }})</td>
+                        <td>></td>
+                        <td>{{ inbound.name }} ({{ inbound.team_name_short }})</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xl-6 col-md-6">
+            <table class="table sim-details table-nonfluid">
+                <thead>
+                    <th></th>
+                    <th class="align-center">Current Team</th>
+                    <th class="align-center">New Team</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="align-right">Formation:</td>
+                        <td>{{ current_team.formation|join:"-" }}</td>
+                        <td>{{ optimal_team.formation|join:"-" }}</td>
+                    </tr>
+                    <tr>
+                        <td class="align-right">Starting 11 total {{ opt_param_verbose }}:</td>
+                        <td>{{ current_team.score_11 }}</td>
+                        <td>{{ optimal_team.score_11 }}</td>
+                    </tr>
+                    <tr>
+                        <td class="align-right">Full squad total {{ opt_param_verbose }}:</td>
+                        <td>{{ current_team.score_tot }}</td>
+                        <td>{{ optimal_team.score_tot }}</td>
+                    </tr>
+                    <tr>
+                        <td class="align-right">Squad cost (max budget £{{ max_budget|floatformat }}):</td>
+                        <td>£{{ current_team.cost|floatformat }}</td>
+                        <td>£{{ optimal_team.cost|floatformat }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

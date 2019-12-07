@@ -1,0 +1,48 @@
+{% load getattribute %}
+<h2>Your {{ type }} lineup</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Player</th>
+            <th>Position</th>
+            <th>Team</th>
+            <th>{{ opt_param_verbose }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in team.lineup %}
+        {% if player.player_id in inbound %}
+        <tr class="inbound">
+            {% elif player.player_id in outbound %}
+        <tr class="outbound">
+            {% else %}
+        <tr>
+            {% endif %}
+            <td>{{ player.name }} ({{ player.team_name_short }})</td>
+            <td>{{ player.position }}</td>
+            <td>{{ player.team_name_short }}</td>
+            <td>{{ player|getattribute:team.param }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td><br /></td>
+            <td><br /></td>
+            <td><br /></td>
+            <td><br /></td>
+        </tr>
+        {% for player in team.subs %}
+            {% if player.player_id in inbound %}
+                <tr class="inbound">
+            {% elif player.player_id in outbound %}
+                <tr class="outbound">
+            {% else %}
+                <tr>
+            {% endif %}
+            <td>{{ player.name }} ({{ player.team_name_short }})</td>
+            <td>{{ player.position }}</td>
+            <td>{{ player.team_name_short }}</td>
+            <td>{{ player|getattribute:team.param }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -1,0 +1,53 @@
+<h2>Customise simulation</h2>
+<form onsubmit="return false;" method="POST" id="post-form">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="col-xl-4 col-md-4">
+            <p><b>Optimisation parameter:</b></p>
+            {{ transfer_form.parameter }}
+        </div>
+
+        <div class="col-xl-4 col-md-4">
+            <p><b>Budget:</b></p>
+            {{ transfer_form.max_budget }}
+        </div>
+
+        <div class="col-xl-4 col-md-4">
+            <p><b>Number of subs:</b></p>
+            {{ transfer_form.num_subs }}
+        </div>
+    </div>
+
+    <div id="include-exclude">
+        <div class="row">
+            <div class="col-xl-4 col-md-4">
+                <p><b>Select players to include:</b></p>
+                {{ transfer_form.include }}
+            </div>
+
+            <div class="col-xl-8 col-md-8">
+                <div class="include">
+                    <br>
+                    <div id="results-include"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-4 col-md-4">
+                <p><b>Select players to exclude:</b></p>
+                {{ transfer_form.exclude }}
+            </div>
+
+            <div class="col-xl-8 col-md-8">
+                <div class="exclude">
+                    <br>
+                    <div id="results-exclude"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-outline-success btn-green btn-simulation">Generate Transfers</button>
+</form>

@@ -1,0 +1,85 @@
+{% extends 'base.html' %} {% load static %} {% block styles %} {% endblock styles %}
+{% block content %}
+<div class="container page-content">
+    <div class="col-md-12">
+        <div class="container">
+            <h1>Lineup Optimiser</h1>
+            <p>Get the best possible starting 11.</p>
+            {% if request.session.username or request.session.team_name %}
+            <div class="">
+
+                <div class="row">
+                    <!-- COLUMN 1 START -->
+                    <div class="col-xl-6 col-md-6 sim-col">
+                        <!-- {% include 'simulation_results.html' %} -->
+                        {% include 'lineup_sim_form.html' %}
+                    </div>
+                    <!-- COLUMN 1 END -->
+
+                    <!-- COLUMN 2 START  -->
+                    <div class="col-xl-6 col-md-6 sim-col">
+                        {% if optimal_squad %}
+                        {% include 'optimal_squad_table.html' %}
+                        {% else %}
+                        {% include "current_squad_table.html" %}
+                        {% endif %}
+                    </div>
+                    <!-- COLUMN 2 END -->
+                </div>
+
+            </div>
+            {% else %}
+            <p>You need to be connected to your squad to use this feature. You can connect to your squad by clicking 'Connect Squad' at the top of the page.</p>
+            {% endif %}
+
+            <hr>
+            <!-- other options_start -->
+            <h2>More squad analysis:</h2>
+            <div class="more-analysis-options">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-xl-6 col-md-6 text-center left-analysis-option">
+                            <a class="" href="{% url 'transfers' %}">
+                                <div class="icon text-center">
+                                    <i class="fas fa-exchange-alt fa-4x"></i>
+                                </div>
+                                <h3>Transfer Wizard</h3>
+                                <p>Suggests which players you should transfer for maximum points.</p>
+                            </a>
+                        </div>
+
+                        <div class="col-xl-6 col-md-6 text-center analysis-option">
+                            <a class="" href="{% url 'wildcard' %}">
+                                <div class="icon">
+                                    <i class="fas fa-users fa-4x"></i>
+                                </div>
+                                <h3>Wildcard Generator</h3>
+                                <p>Generates a full squad to a specified budget that maximises a chosen parameter.</p>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-xl-6 col-md-6 text-center d-none d-md-block">
+                            <p><a class="btn btn-custom" href="{% url 'transfers' %}" role="button">View details
+                                    &raquo;</a></p>
+                        </div>
+
+                        <div class="col-xl-6 col-md-6 text-center d-none d-md-block">
+                            <p><a class="btn btn-custom" href="{% url 'wildcard' %}" role="button">View details
+                                    &raquo;</a></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- other options_end -->
+
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

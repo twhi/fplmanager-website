@@ -1,0 +1,11 @@
+<div class="lineup-simulation-form">
+        <p>Enter your optimisation parameters below and hit 'Generate Lineup' to get going.</p>
+        <form method="post">
+            {% csrf_token %}
+            <p>Optimisation parameter: </p>
+            {{ lineup_form.parameter }}
+            <br>
+    
+            <button class="btn btn-outline-success btn-green" type="submit" name="lineup_simulation">Generate Lineup</button>
+        </form>
+    </div>

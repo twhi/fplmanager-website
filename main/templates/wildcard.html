@@ -1,0 +1,92 @@
+{% extends 'base.html' %} {% load static %} {% block styles %} {% endblock styles %}
+{% block content %}
+<div class="container page-content">
+    <div class="col-md-12">
+        <div class="container">
+
+            <h1>Wildcard Generator</h1>
+            <p>Generate the perfect wildcard squad</p>
+            {% if request.session.username or request.session.team_name %}
+
+            <div class="transfer-form">
+                <div class="row col-md-12">
+                    {% include 'wildcard_sim_form.html' %}
+                </div>
+            </div>
+
+            <div id="simulation-results-section"></div>
+
+            <div class="squads">
+                <div class="row">
+                    <div class="col-xl-6 col-md-6 sim-col" id="current-team-section">
+                        {% include "current_squad_table.html" %}
+                    </div>
+
+                    <div class="col-xl-6 col-md-6 sim-col" id="optimal-team-section">
+                    </div>
+                </div>
+
+            </div>
+            {% else %}
+            <p>You need to be connected to your squad to use this feature. You can connect to your squad by clicking
+                'Connect Squad' at the top of the page.</p>
+            {% endif %}
+
+            <hr>
+            <!-- other options_start -->
+            <h2>More squad analysis:</h2>
+            <div class="more-analysis-options">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-xl-6 col-md-6 text-center analysis-option">
+                            <a class="" href="{% url 'lineup' %}">
+                                <div class="icon text-center">
+                                    <i class="fas fa-chart-line fa-4x"></i>
+                                </div>
+                                <h3>Lineup Optimisation</h3>
+                                <p>Can't make any more transfers, but want to maximise your chances of success? Use this
+                                    tool to
+                                    maximise the returns from your starting 11.</p>
+                            </a>
+                        </div>
+
+                        <div class="col-xl-6 col-md-6 text-center analysis-option">
+                            <a class="" href="{% url 'wildcard' %}">
+                                <div class="icon">
+                                    <i class="fas fa-users fa-4x"></i>
+                                </div>
+                                <h3>Wildcard Generator</h3>
+                                <p>Generates a full squad to a specified budget that maximises a chosen parameter.</p>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-xl-6 col-md-6 text-center d-none d-md-block">
+                            <p><a class="btn btn-custom" href="{% url 'lineup' %}" role="button">View details
+                                    &raquo;</a></p>
+                        </div>
+
+                        <div class="col-xl-6 col-md-6 text-center d-none d-md-block">
+                            <p><a class="btn btn-custom" href="{% url 'wildcard' %}" role="button">View details
+                                    &raquo;</a></p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- other options_end -->
+
+
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'main_static/includeExcludePlayers.js' %}"></script>
+{% endblock scripts %}

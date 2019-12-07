@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+{% endblock styles %}
+
+
+{% block content %}
+<!-- Page Banner Start -->
+<section class="landing-section landing-main">
+    <div class="landing-section-content">
+        <div class="landing-section-text col-md-8">
+            <h1>FPLManager</h1>
+            <hr class="hr-banner">
+            <p class="landing-main-text lead">Effortlessly harness the power of Linear Programming to
+                optimise your fantasy football squad
+            </p>
+        </div>
+    </div>
+</section>
+<!-- Page Banner End -->
+
+<!-- analysis options_start -->
+<div class="analysis-options">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xl-4 col-md-4 text-center left-analysis-option">
+                <a class="" href="{% url 'transfers' %}">
+                    <div class="icon text-center">
+                        <i class="fas fa-exchange-alt fa-4x"></i>
+                    </div>
+                    <h3>Transfer Wizard</h3>
+                    <p>Suggests which players you should transfer for maximum points.</p>
+                </a>
+            </div>
+
+            <div class="col-xl-4 col-md-4 text-center analysis-option">
+                <a class="" href="{% url 'wildcard' %}">
+                    <div class="icon">
+                        <i class="fas fa-users fa-4x"></i>
+                    </div>
+                    <h3>Wildcard Generator</h3>
+                    <p>Generates a full squad to a specified budget that maximises a chosen parameter.</p>
+                </a>
+            </div>
+
+            <div class="col-xl-4 col-md-4 text-center analysis-option">
+                <a class="" href="{% url 'lineup' %}">
+                    <div class="icon text-center">
+                        <i class="fas fa-chart-line fa-4x"></i>
+                    </div>
+                    <h3>Lineup Optimisation</h3>
+                    <p>Can't make any more transfers, but want to maximise your chances of success? Use this tool to
+                        maximise the returns from your starting 11.</p>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-xl-4 col-md-4 text-center d-none d-md-block">
+                <p><a class="btn btn-custom" href="{% url 'transfers' %}" role="button">View details &raquo;</a></p>
+            </div>
+
+            <div class="col-xl-4 col-md-4 text-center d-none d-md-block">
+                <p><a class="btn btn-custom" href="{% url 'wildcard' %}" role="button">View details &raquo;</a></p>
+            </div>
+
+            <div class="col-xl-4 col-md-4 text-center d-none d-md-block">
+                <p><a class="btn btn-custom" href="{% url 'lineup' %}" role="button">View details &raquo;</a></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- analysis options_end -->
+
+<hr>
+
+{% endblock content %}

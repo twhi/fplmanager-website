@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+{% endblock styles %}
+
+
+{% block content %}
+<div class="container page-content">
+    <div class="col-md-12">
+        <div class="container">
+
+            <h1>About</h1>
+            <hr class="hr-faq">
+            <h2>How does it work?</h2>
+            <p>All of the analysis methods on this website utilise Linear Programming (LP) techniques to allow you to
+                optimise your team.</p>
+            <p>Selecting the optimal fantasy football team is a special version of the famous <a class="text-link"
+                    href="https://en.wikipedia.org/wiki/Knapsack_problem">Knapsack Problem</a>. The Knapsack Problem can
+                be stated in the following way:</p>
+            <p><i>Suppose you are a burglar who has a bag with a limited carrying capacity. You break into an
+                    electronics store and want to maximise the value of the items that you steal, without exceeding your
+                    bag's carrying capacity. Some items in the store are small and expensive (mobile phones), some are
+                    small and inexpensive (CDs), some items are large and expensive (flat screen televisions), and some
+                    items are large and inexpensive (computer desks). Which items do you take to maximise your profits
+                    from this particular heist?</i></p>
+            <p>This problem can be reworded to apply to the selection of a football team:</p>
+            <p><i>Suppose you are a football manager who has a team with a limited budget. You want to maximise the
+                    quality of the players that you select, without exceeding your team's budget. Some players in the
+                    league are cheap and high quality, some are cheap and low-quality, some players are expensive and
+                    high quality, whilst some players are expensive and low-quality. Which players do you select to
+                    maximise your team's return from this particular gameweek?</i></p>
+            <p>There are many ways to solve these types of problems. Rather than reinventing the wheel and developing a
+                bespoke LP solver, a Python library called <a class="text-link"
+                    href="https://pythonhosted.org/PuLP/index.html">PuLP</a> has been used. PuLP is an open-source
+                Linear Programming library and comes packaged with lightning fast commercial-grade solvers - simply plug
+                in your constraints and PuLP will take care of the rest.</p>
+
+            <hr>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="analysis-options">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xl-4 col-md-4 text-center left-analysis-option">
+                <a class="" href="{% url 'transfers' %}">
+                    <div class="icon text-center">
+                        <i class="fas fa-exchange-alt fa-4x"></i>
+                    </div>
+                    <h3>Transfer Wizard</h3>
+                    <p>Suggests which players you should transfer for maximum points.</p>
+                </a>
+            </div>
+
+            <div class="col-xl-4 col-md-4 text-center analysis-option">
+                <a class="" href="{% url 'wildcard' %}">
+                    <div class="icon">
+                        <i class="fas fa-users fa-4x"></i>
+                    </div>
+                    <h3>Wildcard Generator</h3>
+                    <p>Generates a full squad to a specified budget that maximises a chosen parameter.</p>
+                </a>
+            </div>
+
+            <div class="col-xl-4 col-md-4 text-center analysis-option">
+                <a class="" href="{% url 'lineup' %}">
+                    <div class="icon text-center">
+                        <i class="fas fa-chart-line fa-4x"></i>
+                    </div>
+                    <h3>Lineup Optimisation</h3>
+                    <p>Can't make any more transfers, but want to maximise your chances of success? Use this tool to
+                        maximise the returns from your starting 11.</p>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-xl-4 col-md-4 text-center d-none d-md-block">
+                <p><a class="btn btn-custom" href="{% url 'transfers' %}" role="button">View details &raquo;</a></p>
+            </div>
+
+            <div class="col-xl-4 col-md-4 text-center d-none d-md-block">
+                <p><a class="btn btn-custom" href="{% url 'wildcard' %}" role="button">View details &raquo;</a></p>
+            </div>
+
+            <div class="col-xl-4 col-md-4 text-center d-none d-md-block">
+                <p><a class="btn btn-custom" href="{% url 'lineup' %}" role="button">View details &raquo;</a></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

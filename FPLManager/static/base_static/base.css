@@ -1,0 +1,295 @@
+body {
+  font-family: 'Lato', sans-serif;
+  padding-top: 60px;
+}
+
+td, th {
+  padding-bottom: 0px !important;
+  padding-top: 0px !important;
+  vertical-align: middle !important;
+}
+
+.page-content {
+  padding-top: 20px;
+}
+
+.landing-section {
+  min-height: 80vh;
+  width: 100vw;
+  max-width:100%;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+}
+
+.landing-main {
+  background: url("cover.jpg") no-repeat center center fixed;
+  background-size:cover;
+}
+
+
+.outbound {
+  background-color: #fce3e3;
+}
+
+.inbound {
+  background-color: #c9fdc5;
+}
+
+h1, h2, .navbar-brand {
+  font-family: 'Staatliches', 'cursive';
+}
+
+.main-text {
+  background-color: rgba(245, 245, 245, 0.85);
+}
+
+.text-link {
+  color: blue;
+}
+
+.text-link:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+a {
+  color: inherit;
+}
+
+.current-team-section {
+  padding-right: 0px;
+}
+
+a:hover {
+  color: grey;
+  text-decoration: none;
+}
+
+.hr-modal {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.hr-faq {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+
+@media (max-width: 978px) {
+  .sim-content {
+    padding:0;
+  }
+}
+
+
+.hr-banner {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-top: 2px solid white;
+}
+
+hr {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.current-session {
+  color: white;
+  padding-right: 10px;
+}
+
+.btn-green {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #fff;
+  border-style: none;
+  background-color: #1db954;
+}
+
+.btn-green:hover {
+  color: #fff;
+  background-color: #0e5e2b;
+}
+
+.btn-simulation {
+  margin-top: 20px;
+}
+
+.align-right {
+  font-weight: bold;
+  text-align: right;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.table-nonfluid {
+  width: auto !important;
+}
+
+#login-creds-user {
+  margin-bottom: 10px;
+}
+
+.sim-col {
+  padding-top: 50px;
+}
+
+.analysis-option {
+  border-left: 1px solid #D3D3D3;
+  border-top: 1px hidden #D3D3D3;
+  margin-top: 50px;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .analysis-option {
+      border-left: 1px hidden #D3D3D3 !important;
+      border-top: 1px solid #D3D3D3 !important;
+  }
+}
+
+.left-analysis-option {
+  margin-top: 50px;
+  padding: 10px;
+}
+
+.intro-text {
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+.navbar-login {
+  margin-left: 50px;
+}
+
+.navbar-nav,
+.navbar-brand li a {
+  line-height: 30px;
+}
+
+.btn-custom {
+  color: #ffffff;
+  background-color: #340068;
+  letter-spacing: 0.05em;
+}
+
+.btn-custom:hover,
+.btn-custom:active,
+.btn-custom:focus,
+.btn-custom.active {
+  background: grey;
+  color: #ffffff;
+}
+
+#post-form {
+  width: 100%;
+}
+
+.player-box {
+  color: black;
+  border-radius: 100px;
+  margin: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  display: inline-block;
+}
+
+#results-include>.player-box {
+  font-size: 12px;
+  border: 2px solid #0e5e2b;
+  background-color: white;
+}
+
+#results-exclude>.player-box {
+  font-size: 12px;
+  border: 2px solid #890d0d;
+  background-color: white;
+}
+
+.player-name {
+  display: inline-block;
+  margin-bottom: 1px;
+}
+
+.transfer-form, .simulation-results {
+  background-color: #f6f0ff;
+  border: 1px solid black;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.simulation-results {
+  margin-top: 20px;
+}
+
+#include-exclude > .row, #post-form > .row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.close-button {
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 5px;
+  display: inline-block;
+}
+
+.close-button:hover {
+  cursor: pointer;
+  color: red;
+}
+
+nav {
+  background-color: #340068;
+}
+
+.analysis-options, .more-analysis-options {
+  color: #340068;
+}
+
+.more-analysis-options{
+  padding-bottom: 50px;
+}
+
+
+.landing-section {
+  min-height: 60vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.landing-section-content {
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.7);
+  width: 100vw;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #ccc;
+}
+
+.landing-section-text {
+  color: white;
+}
+
+.header {
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+}

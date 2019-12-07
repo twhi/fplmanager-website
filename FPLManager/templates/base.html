@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>FPLManager</title>
+
+    <link rel="stylesheet" href="{% static 'base_static/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'base_static/base.css' %}">
+
+    <!-- Font Awesome Stuff -->
+    <link rel="stylesheet" href="{% static 'base_static/font-awesome.min.css' %}">
+    <script src="https://kit.fontawesome.com/f4c7f2a9d8.js" crossorigin="anonymous"></script>
+
+    <!-- Google Font Link -->
+    <link href="https://fonts.googleapis.com/css?family=Lato|Staatliches&display=swap" rel="stylesheet">
+
+
+
+    {% block styles %}
+    {% endblock styles %}
+</head>
+
+<body class="page">
+    <div id="header">
+        {% include 'navbar.html' %}
+    </div>
+
+    <main class="main" role="main">
+
+        <section class="content">
+            {% block content %}{% endblock content %}
+        </section>
+
+    </main>
+
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+    {% include 'login_modal.html' %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{% static 'base_static/popper.min.js' %}"></script>
+    <script src="{% static 'base_static/bootstrap/js/bootstrap.min.js' %}"></script>
+    
+    {% block scripts %}
+    {% endblock scripts %}
+</body>
+
+</html>
