@@ -12,7 +12,6 @@ function getInfoFromPage() {
         'include': include.length == 0 ? null : include,
         'exclude': exclude.length == 0 ? null : exclude,
     }
-    console.log(playerElements);
     return playerElements
 }
 
@@ -27,13 +26,12 @@ $(document).on('submit', '#post-form', function (e) {
             action: 'post'
         },
         success: function (response) {
-            console.log('success!');
             $("#simulation-results-section").html(response.results_section);
             $("#optimal-team-section").html(response.optimal_squad_table);
             $("#current-team-section").html(response.current_squad_table);
         },
-        error: function (xhr, errmsg, err) {
-            alert('suttin went wrong');
+        error: function (data) {
+            alert(data.responseJSON.error + '\n\nError code: ' + data.status);
         }
     });
 });

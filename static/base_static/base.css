@@ -1,12 +1,16 @@
 body {
   font-family: 'Lato', sans-serif;
-  padding-top: 80px;
+  padding-top: 60px;
 }
 
 td, th {
   padding-bottom: 0px !important;
   padding-top: 0px !important;
   vertical-align: middle !important;
+}
+
+.page-content {
+  padding-top: 20px;
 }
 
 .landing-section {
@@ -254,10 +258,6 @@ nav {
   padding-bottom: 50px;
 }
 
-.landing-main {
-  background: url('../cover.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
 
 .landing-section {
   min-height: 60vh;
