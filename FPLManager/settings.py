@@ -6,7 +6,7 @@ if is_prod:
         from .settings_prod import *
     except Exception as e:
         raise
-    print('Using production environment settings..')
+    print('Using production environment settings.')
 else:
     try:
         from .settings_dev import *
