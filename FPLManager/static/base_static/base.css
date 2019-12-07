@@ -151,7 +151,6 @@ hr {
 @media (max-width: 768px) {
   .analysis-option {
       border-left: 1px hidden #D3D3D3 !important;
-      border-top: 1px solid #D3D3D3 !important;
   }
 }
 
