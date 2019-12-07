@@ -5,7 +5,6 @@
         <tr>
             <th>Player</th>
             <th>Position</th>
-            <th>Team</th>
         </tr>
     </thead>
     <tbody>
@@ -13,11 +12,9 @@
         <tr>
             <td>{{ player.name }} ({{ player.team_name_short }})</td>
             <td>{{ player.position }}</td>
-            <td>{{ player.team_name_short }}</td>
         </tr>
         {% endfor %}
         <tr>
-            <td><br /></td>
             <td><br /></td>
             <td><br /></td>
         </tr>
@@ -25,7 +22,6 @@
         <tr>
             <td>{{ player.name }} ({{ player.team_name_short }})</td>
             <td>{{ player.position }}</td>
-            <td>{{ player.team_name_short }}</td>
         </tr>
         {% endfor %}
     </tbody>

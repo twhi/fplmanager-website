@@ -6,8 +6,6 @@ from .settings_common import *  # IMPORT COMMON SETTINGS
 
 ALLOWED_HOSTS = ['arcane-anchorage-15049.herokuapp.com']  # prod
 
-DEBUG=True
-
 # AWS S3 bucket credentials
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_BUCKET_NAME')
 AWS_S3_REGION_NAME = os.environ.get('AWS_BUCKET_REGION')
