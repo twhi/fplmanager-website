@@ -91,7 +91,6 @@ class TeamTable:
 
     def process_table(self):
         self.get_next_games()
-        pass
 
     def get_next_games(self):
         if self.players:

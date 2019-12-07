@@ -457,8 +457,6 @@ def update_players():
                 'name_raw': p['name_raw'],
                 'team_id': p['team'],
                 'team_code': p['team_code'],
-                'team_name': p['team_name'],
-                'team_name_short': p['team_name_short'],
                 'position': p['position'],
                 'assists': p['assists'],
                 'bonus': p['bonus'],
@@ -495,6 +493,16 @@ def update_players():
                 'value_season': float(p['value_season'])
             }
         )
+        try:
+            Player.objects.update_or_create(
+                player_id=p['id'],
+                defaults={
+                    'team_name': p['team_name'],
+                    'team_name_short': p['team_name_short'],
+                }
+            )
+        except KeyError:
+            pass
 
 
 @transaction.atomic
@@ -507,11 +515,19 @@ def update_teams():
                 'team_code': t['code'],
                 'team_name': t['name'],
                 'team_name_short': t['short_name'],
-                'next_game_team_id': t['next_team_id'],
-                'next_game_team_name': t['next_team_name'],
-                'next_game_difficulty': t['next_team_diff'],
             }
         )
+        try:
+            Team.objects.update_or_create(
+                team_id=t['id'],
+                defaults={
+                    'next_game_team_id': t['next_team_id'],
+                    'next_game_team_name': t['next_team_name'],
+                    'next_game_difficulty': t['next_team_diff'],
+                }
+            )
+        except KeyError:
+            pass
 
 
 def db_operations(request):
