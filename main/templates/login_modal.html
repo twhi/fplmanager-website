@@ -11,27 +11,38 @@
       <div class="modal-body mx-3">
         <p>Sign in using your FPL credentials to get your current squad as-is:</p>
 
-
-        <form action="/login/" method="post" class="login-creds">
+        <form method="POST" onsubmit="return false;" class="login-creds" id="login-creds">
           {% csrf_token %}
 
           {{ login_creds_form.username }}
           {{ login_creds_form.password }}
-
+          <div id="creds-error-message"></div>
           <div class="modal-footer d-flex justify-content-center">
             <button class="btn btn-outline-success btn-green" type="submit" name="login-creds">Connect</button>
           </div>
         </form>
 
         <hr class="hr-modal">
-        <form action='/login/' method='post' class='login-id'>
+        <!-- <form action='/login/' method='post' class='login-id'>
           {% csrf_token %}
           <p>Alternatively, enter your unique squad ID. This will get your squad as of last gameweek - any changes you
             have made since then will not be pulled through.</p>
           {{ login_id_form.unique_id }}
           <div class="modal-footer d-flex justify-content-center">
             <button class="btn btn-outline-success btn-green" type="submit" name="login-id">Connect</button>
-          </div>
+          </div> -->
+
+          <form method='post' onsubmit="return false;" class='login-id' id="login-id">
+            {% csrf_token %}
+            <p>Alternatively, enter your unique squad ID. This will get your squad as of last gameweek - any changes you
+              have made since then will not be pulled through.</p>
+            {{ login_id_form.unique_id }}
+            <div id="id-error-message"></div>
+            <div class="modal-footer d-flex justify-content-center">
+              <button class="btn btn-outline-success btn-green" type="submit" name="login-id">Connect</button>
+            </div>
+
+      
           <hr class="hr-modal">
       </div>
       </form>

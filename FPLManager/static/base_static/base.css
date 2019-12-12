@@ -103,17 +103,32 @@ hr {
   padding-right: 10px;
 }
 
-.btn-green {
+.btn-green, .btn-blue {
   margin-top: 10px;
   margin-bottom: 10px;
   color: #fff;
   border-style: none;
+}
+
+.btn-green {
   background-color: #1db954;
 }
 
 .btn-green:hover {
-  color: #fff;
   background-color: #0e5e2b;
+}
+
+#creds-error-message, #id-error-message {
+  margin-top: 10px;
+}
+
+.btn-blue {
+  margin-right: 10px;
+  background-color: #1d5eb9;
+}
+
+.btn-blue:hover {
+  background-color: #0e265e;
 }
 
 .btn-simulation {

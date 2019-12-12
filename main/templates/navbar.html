@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark  fixed-top navbar-custom">
     <a class="navbar-brand logo-navbar" href="{% url 'home' %}">FPLManager</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -25,23 +25,25 @@
         </ul>
 
         {% if request.session.username %}
-        <form action="/logout/" class="form-inline my-2 my-lg-0" method="post">
-            {% csrf_token %}
             <ul class="navbar-nav ml-auto current-session">
                 <li class="nav-item">You're currently logged in as {{ request.session.username }}</li>
             </ul>
-            <button type="submit" class="btn btn-outline-success btn-green" name="logout-cred">Logout</button>
-        </form>
-        {% elif request.session.team_name %}
-        <form action="/logout/" class="form-inline my-2 my-lg-0" method="post">
-            {% csrf_token %}
+            {% include 'refresh_team_button.html' %}
+            <form action="/logout/" class="form-inline my-2 my-lg-0" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-success btn-green" name="logout-cred">Logout</button>
+            </form>
+            {% elif request.session.team_name %}
             <ul class="navbar-nav ml-auto current-session">
                 <li class="nav-item">You're currently logged in as {{ request.session.team_name }}</li>
             </ul>
-            <button type="submit" class="btn btn-outline-success btn-green" name="logout-id">Logout</button>
-        </form>
+            <form action="/logout/" class="form-inline my-2 my-lg-0" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-success btn-green" name="logout-id">Logout</button>
+            </form>
         {% else %}
         <form class="form-inline my-2 my-lg-0">
+            {% csrf_token %}
             <a href="#" class="btn btn-outline-success btn-green" data-toggle="modal" data-target="#modalLoginForm">Connect Squad</a>
         </form>
         {% endif %}

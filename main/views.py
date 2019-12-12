@@ -36,7 +36,52 @@ def prepare_team_for_template(lineup, param):
     return lineup
 
 
-def receive_form(request):
+def login_id_ajax(request):
+    if request.POST.get('action') == 'post' and request.is_ajax():
+        # extract data from ajax request
+        account_id = request.POST.get('acc_id')
+
+        if account_id:
+            team_info = get_squad_from_id(request, account_id)
+
+            if team_info:
+                request.session['team_name'] = team_info['team_name']
+                request.session['current_team'] = team_info['current_team']
+                request.session['current_lineup'] = team_info['current_lineup']
+                request.session['total_money_available'] = team_info['total_money_available']
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            else:
+                response = JsonResponse({
+                    'error': 'Unable to login with the provided credentials.'
+                })
+                response.status_code = 500
+                return response
+
+
+def login_creds_ajax(request):
+    if request.POST.get('action') == 'post' and request.is_ajax():
+        # extract data from ajax request
+        creds = json.loads(request.POST.get('creds'))
+        username = creds['user']
+        password = creds['pass']
+        team_info = get_team_info_from_creds(request, username, password)
+        if team_info:
+            # login success, save variables to session
+            request.session['username'] = username
+            request.session['password'] = password
+            request.session['current_team'] = team_info['current_team']
+            request.session['current_lineup'] = team_info['current_lineup']
+            request.session['total_money_available'] = team_info['total_money_available']
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        else:
+            response = JsonResponse({
+                'error': 'Unable to login with the provided credentials.'
+            })
+            response.status_code = 500
+            return response
+
+
+def receive_sim_form(request):
 
     if request.POST.get('action') == 'post' and request.is_ajax():
         # extract data from ajax request
@@ -119,7 +164,7 @@ def receive_form(request):
     return response
 
 
-def get_players(request):
+def get_autocomplete_players(request):
     if request.is_ajax():
         q = request.GET.get('term', '')
         players = Player.objects.filter(
@@ -146,54 +191,16 @@ def wildcard(request):
     wildcard_form = WildcardForm()
 
     # if user is logged in then populate max budget field with user's max budget and get current squad
-    if 'squad' in request.session:
-        if request.session['squad']:
-            wildcard_form.fields['max_budget'].initial = request.session['squad']['total_money_available']
-            squad = request.session['squad']
-
-            SORT_ORDER = {'G': 0, 'D': 1, 'M': 2, 'F': 3}
-            squad['team'].sort(
-                key=lambda x: SORT_ORDER[x['fields']['position']])
+    if 'current_lineup' in request.session:
+        if request.session['current_lineup']:
+            wildcard_form.fields['max_budget'].initial = request.session['total_money_available']
+            current_lineup = request.session['current_lineup']
 
     context = {
         'wildcard_form': wildcard_form,
         'wildcard': 'active',
         'squad': squad,
     }
-
-    if 'wildcard_simulation' in request.POST:
-        wildcard_form = WildcardForm(request.POST)
-        if wildcard_form.is_valid():
-            opt_param = wildcard_form.cleaned_data['parameter']
-            max_budget = wildcard_form.cleaned_data['max_budget']
-            request.session['opt_param'] = opt_param
-            request.session['max_budget'] = max_budget
-
-            sim = Opt(opt_param, max_budget, request.session['squad']['team'])
-
-            if sim.prob.status != 1:
-                # todo: add some error messaging informing user of failed simulation
-                return render(request, 'wildcard.html', context)
-
-            optimal_team = sim.results
-            lineup_opt = Lineup(optimal_team, opt_param)
-
-            current_team_ids = request.session['current_team_ids']
-            current_team = Player.objects.filter(
-                player_id__in=current_team_ids)
-            lineup_current = Lineup(current_team, opt_param)
-
-            subs = extract_subs_from_lineups(
-                lineup_current.team, lineup_opt.team)
-
-            context.update({
-                'opt_param': opt_param,
-                'max_budget': max_budget,
-                'optimal_team': lineup_opt.choose_optimal_lineup(),
-                'subs': subs,
-            })
-
-            return render(request, 'wildcard.html', context)
 
     return render(request, 'wildcard.html', context)
 
@@ -324,7 +331,7 @@ def get_team_info_from_creds(request, username, password):
                 'squad_value': squad_value,
                 'total_money_available': total_money_available,
                 }
-
+    
 
 def _get_team_info(session, unique_id):
     url_template = 'https://fantasy.premierleague.com/api/entry/{}/'
@@ -336,16 +343,18 @@ def _get_last_event_info(session, unique_id, event):
     return json.loads(session.get(squad_url_template.format(u_id=unique_id, ev=event)).text)
 
 
-def get_squad_from_id(request):
+def get_squad_from_id(request, unique_id):
     # 475068
     session = requests.Session()
-    unique_id = request.session['unique_id']
     team_info = _get_team_info(session, unique_id)
     
-    # GAME UPDATING ERROR CATCHING
     try:
         current_event = team_info['current_event']
     except TypeError:
+        # GAME UPDATING ERROR CATCHING
+        return None
+    except KeyError:
+        # ID NOT FOUND
         return None
 
     last_event_info = _get_last_event_info(session, unique_id, current_event)
@@ -379,15 +388,12 @@ def get_squad_from_id(request):
 
 
 def extract_subs_from_lineups(lineup_old, lineup_new):
-    # can probably write these as list comprehensions
     outbound = []
     inbound = []
     for player_new, player_old in zip(lineup_new, lineup_old):
-        # not in old lineup -> player is being subbed in
-        if player_new not in lineup_old:
+        if not any(p['player_id'] == player_new['player_id'] for p in lineup_old):
             inbound.append(player_new)
-        # not in new lineup -> player was subbed out
-        if player_old not in lineup_new:
+        if not any(p['player_id'] == player_old['player_id'] for p in lineup_new):
             outbound.append(player_old)
 
     # sort lists by position
@@ -403,46 +409,18 @@ def logout(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-def login(request):
-    # 475068
-    context = {}
-    if 'login-creds' in request.POST:
-        login_form = LoginCredsForm(request.POST)
-
-        if login_form.is_valid():
-
-            # get credentials from form
-            username = login_form.cleaned_data['username']
-            password = login_form.cleaned_data['password']
-
-            # attempt to log in and get user's squad
-            team_info = get_team_info_from_creds(request, username, password)
-
-            # if successful, save squad to session
-            if team_info:
-                # save variables to session
-                request.session['username'] = username
-                request.session['password'] = password
-                request.session['current_team'] = team_info['current_team']
-                request.session['current_lineup'] = team_info['current_lineup']
-                request.session['total_money_available'] = team_info['total_money_available']
-
-    if 'login-id' in request.POST:
-        login_form = LoginIdForm(request.POST)
-
-        if login_form.is_valid():
-            unique_id = login_form.cleaned_data['unique_id']
-
-            request.session['unique_id'] = unique_id
-
-            team_info = get_squad_from_id(request)
-
-            if team_info:
-                request.session['team_name'] = team_info['team_name']
-                request.session['current_team'] = team_info['current_team']
-                request.session['current_lineup'] = team_info['current_lineup']
-                request.session['total_money_available'] = team_info['total_money_available']
-
+def refresh_team(request):
+    # request.session.username or request.session.team_name
+    if 'username' in request.session:
+        username = request.session['username']
+        password = request.session['password']
+        team_info = get_team_info_from_creds(request, username, password)
+        if team_info:
+            request.session['current_team'] = team_info['current_team']
+            request.session['current_lineup'] = team_info['current_lineup']
+            request.session['total_money_available'] = team_info['total_money_available']
+    else:
+        print('refresh team error')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 

@@ -6,7 +6,7 @@ class LoginIdForm(forms.Form):
         attrs={
             'class': 'form-control',
             'placeholder': 'Unique FPL ID',
-            'id': 'login-id'
+            'id': 'login-id-id'
         }
     ))
 
