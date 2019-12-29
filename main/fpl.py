@@ -38,6 +38,12 @@ class PlayerTable:
         # removes diacritical characters from players names to aid searching
         self.add_raw_name()
 
+        # gets price change data from fplstatistics.com
+        self.get_price_change()
+
+    def get_price_change(self):
+        pass
+    
     def add_raw_name(self):
         for p in self.table:
             p['name_raw'] = unidecode.unidecode(p['web_name'])

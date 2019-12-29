@@ -511,26 +511,9 @@ def update_teams():
 def db_operations(request):
 
     if request.method == 'POST':
-
-        if 'update_team_data' in request.POST:
-            print('updating team table in DB')
-            update_teams()
-            return render(request, 'database_operations.html')
-
-        if 'pull_team_data' in request.POST:
-            print('grabbing team data from database')
-            teams = Team.objects.all()
-            context['team_data'] = teams
-            return render(request, 'database_operations.html')
-
-        if 'update_player_data' in request.POST:
+        if 'update_database' in request.POST:
             update_players()
-            return render(request, 'database_operations.html')
-
-        if 'pull_player_data' in request.POST:
-            print('grabbing player data from database')
-            players = Player.objects.all()
-            context['player_data'] = players
+            update_teams()
             return render(request, 'database_operations.html')
 
     return render(request, 'database_operations.html')
