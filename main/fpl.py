@@ -56,7 +56,6 @@ class PlayerTable:
                     p['kpi'] = player_stats_info[13]
                     break
 
-
     def get_top_50_count(self):
         for p in self.table:
             p['top_50_count'] = 0
