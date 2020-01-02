@@ -33,6 +33,7 @@ class Player(models.Model):
     transfers_out = models.IntegerField(default=0)
     transfers_out_event = models.IntegerField(default=0)
     yellow_cards = models.IntegerField(default=0)
+    top_50_count = models.IntegerField(default=0)
 
     creativity = models.FloatField(default=0.0)
     ep_next = models.FloatField(default=0.0)
@@ -47,6 +48,8 @@ class Player(models.Model):
     threat = models.FloatField(default=0.0)
     value_form = models.FloatField(default=0.0)
     value_season = models.FloatField(default=0.0)
+    kpi = models.FloatField(default=0.0)
+    price_change = models.FloatField(default=0.0)
 
     updated = models.DateTimeField(auto_now=True)
 

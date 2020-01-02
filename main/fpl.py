@@ -2,7 +2,7 @@ import requests
 import json
 import unidecode
 from .models import Player, Team
-
+from .fplstatistics import FplStatistics
 
 class PlayerTable:
     PLAYER_TABLE_URL = 'https://fantasy.premierleague.com/api/bootstrap-static/'
@@ -13,6 +13,7 @@ class PlayerTable:
         self.teams = Team.objects.all()
 
         self.table = self.get_player_table()
+        self.fpl_statistics = FplStatistics()
         self.process_table()
 
     def get_player_table(self):
@@ -41,8 +42,41 @@ class PlayerTable:
         # gets price change data from fplstatistics.com
         self.get_price_change()
 
+        self.get_top_50_count()
+
+        self.get_kpi()
+
+    def get_kpi(self):
+        for p in self.table:
+            p['kpi'] = 0
+        
+        for p in self.table:
+            for player_stats_info in self.fpl_statistics.player_stats_data:
+                if player_stats_info[1] == p['web_name'] and player_stats_info[2] == p['team_name']:
+                    p['kpi'] = player_stats_info[13]
+                    break
+
+
+    def get_top_50_count(self):
+        for p in self.table:
+            p['top_50_count'] = 0
+
+        for p in self.table:
+            for player_top_50_count in self.fpl_statistics.top_50_data:
+                if player_top_50_count[1] == p['web_name'] and player_top_50_count[2] == p['team_name']:
+                    p['top_50_count'] = int(player_top_50_count[0])
+                    break
+
     def get_price_change(self):
-        pass
+        for p in self.table:
+            player_found = False
+            for player_price_info in self.fpl_statistics.player_price_data:
+                if player_price_info[1] == p['web_name'] and player_price_info[2] == p['team_name']:
+                    player_found = True
+                    p['price_change'] = (float(player_price_info[8]) * 100) + float(player_price_info[11])
+                    break
+            if not player_found:
+                p['price_change'] = -300
     
     def add_raw_name(self):
         for p in self.table:

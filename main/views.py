@@ -468,7 +468,10 @@ def update_players():
                 'selected_by_percent': float(p['selected_by_percent']),
                 'threat': float(p['threat']),
                 'value_form': float(p['value_form']),
-                'value_season': float(p['value_season'])
+                'value_season': float(p['value_season']),
+                'kpi': float(p['kpi']),
+                'top_50_count': int(p['top_50_count']),
+                'price_change': float(p['price_change']),
             }
         )
         try:
