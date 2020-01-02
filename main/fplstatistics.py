@@ -3,7 +3,6 @@ import requests
 from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver import
 
 from .utils import top_50_url, stats_url
 
