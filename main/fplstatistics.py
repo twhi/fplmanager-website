@@ -3,6 +3,7 @@ import requests
 from selenium import webdriver
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver import
 
 from .utils import top_50_url, stats_url
 
@@ -22,7 +23,8 @@ class FplStatistics:
     @staticmethod
     def initialise_selenium():
         caps = DesiredCapabilities.CHROME
-        caps['loggingPrefs'] = {'performance': 'ALL'}
+        caps['goog:loggingPrefs'] = {'performance': 'ALL'}
+
         chrome_options = Options()
         chrome_options.add_argument('--headless')
         d = webdriver.Chrome(options=chrome_options,
