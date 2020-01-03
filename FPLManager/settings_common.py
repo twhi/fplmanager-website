@@ -96,7 +96,7 @@ TEMPLATE_STRING_IF_INVALID = ''
 
 ##########################################################################
 # # security tips from https://reversepython.net/lab/django-web-security-checklist-deployment/
-SECURE_HSTS_SECONDS = 86400  # 1 day
+SECURE_HSTS_SECONDS = 18768000  # ~6 months
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 
