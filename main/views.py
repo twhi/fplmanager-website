@@ -511,17 +511,6 @@ def update_teams():
             pass
 
 
-def db_operations(request):
-
-    if request.method == 'POST':
-        if 'update_database' in request.POST:
-            update_players()
-            update_teams()
-            return render(request, 'database_operations.html')
-
-    return render(request, 'database_operations.html')
-
-
 def landing(request):
     context = {
         'homepage': 'active',

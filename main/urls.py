@@ -12,6 +12,5 @@ urlpatterns = [
     path('ajax/receive_sim_form/', views.receive_sim_form, name='receive_sim_form'),
     path('ajax/login_creds/', views.login_creds_ajax, name='login_creds'),
     path('ajax/login_id/', views.login_id_ajax, name='login_id'),
-    path('db_operations_211091', views.db_operations, name='db_operations'),
     path('refresh_team/', views.refresh_team, name='refresh_team'),
 ]
