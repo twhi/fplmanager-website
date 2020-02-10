@@ -19,7 +19,7 @@ function getInfoFromPage() {
 $(document).on('submit', '#post-form', function (e) {
     $.ajax({
         type: 'POST',
-        url: '/ajax/receive_form/',
+        url: '/ajax/receive_sim_form/',
         data: {
             selected: JSON.stringify(getInfoFromPage()),
             csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
@@ -44,7 +44,7 @@ $('body').on('click', '.close-button', function () {
 // powers the autocomplete ajax calls
 $(function () {
     $("#include").autocomplete({
-        source: "/ajax/get_players/",
+        source: "/ajax/get_autocomplete_players/",
         minLength: 2,
         select: function (event, ui) { //item selected
             appendPlayer(event, ui, "include");
@@ -53,7 +53,7 @@ $(function () {
         },
     });
     $("#exclude").autocomplete({
-        source: "/ajax/get_players/",
+        source: "/ajax/get_autocomplete_players/",
         minLength: 2,
         select: function (event, ui) { //item selected
             appendPlayer(event, ui, "exclude");

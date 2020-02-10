@@ -9,6 +9,11 @@ td, th {
   vertical-align: middle !important;
 }
 
+.icon-padding {
+  padding-left:10px;
+  padding-right:10px;
+}
+
 .page-content {
   padding-top: 20px;
 }
@@ -116,6 +121,10 @@ hr {
 
 .btn-green:hover {
   background-color: #0e5e2b;
+}
+
+#creds-error-message, #id-error-message {
+  margin-top: 10px;
 }
 
 .btn-blue {
