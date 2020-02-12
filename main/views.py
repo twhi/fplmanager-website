@@ -8,6 +8,7 @@ from django.template.loader import render_to_string
 import json
 import requests
 from urllib.parse import urlparse, parse_qs
+import operator
 
 from .opt import Opt
 from .models import Player, Team, Usage
@@ -187,10 +188,15 @@ def get_autocomplete_players(request):
         for pl in players:
             label = pl.name + " (" + pl.team_name_short + ')'
             player_id = pl.player_id
+            search_pos = pl.name_raw.lower().find(q)
+
             results.append({
                 'label': label,
                 'player_id': player_id,
+                'search_pos': search_pos,
             })
+        results.sort(key=operator.itemgetter('search_pos'))
+        p = 0
         data = json.dumps(results)
     else:
         data = 'fail'
