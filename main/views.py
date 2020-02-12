@@ -100,7 +100,6 @@ def receive_sim_form(request):
         current_lineup = prepare_team_for_template(current_lineup, opt_param)
 
         # run optimisation
-        print(request.session)
         sim = Opt(opt_param, max_budget, current_team, num_subs, include, exclude)
 
         u = Usage(
