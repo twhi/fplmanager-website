@@ -104,9 +104,9 @@ class Usage(models.Model):
     user_id = models.IntegerField()
     sim_type = models.IntegerField()
     opt_param = models.CharField(max_length=64)
-    n_subs = models.IntegerField(blank=True, default=0)
-    include = models.CharField(blank=True, default='', max_length=1000)
-    exclude = models.CharField(blank=True, default='', max_length=1000)
+    n_subs = models.IntegerField(blank=True, null=True, default=0)
+    include = models.CharField(blank=True, null=True, default='', max_length=1000)
+    exclude = models.CharField(blank=True, null=True, default='', max_length=1000)
 
     updated = models.DateTimeField(auto_now=True)
 

@@ -108,8 +108,8 @@ def receive_sim_form(request):
             sim_type = 0 if num_subs else 1,
             opt_param = opt_param,
             n_subs = num_subs if num_subs else None,
-            include = ';'.join(include) if len(include) > 0 else None,
-            exclude = ';'.join(exclude) if len(exclude) > 0 else None,
+            include = ';'.join(include) if include else None,
+            exclude = ';'.join(exclude) if exclude else None,
         )
         u.save()
 
