@@ -102,6 +102,7 @@ def receive_sim_form(request):
         # run optimisation
         sim = Opt(opt_param, max_budget, current_team, num_subs, include, exclude)
 
+        # save parameters of simulation for analytics
         u = Usage(
             session_type = 1 if 'username' in request.session else 0,
             user_id = request.session['unique_id'],
