@@ -102,6 +102,14 @@ def receive_sim_form(request):
         # run optimisation
         sim = Opt(opt_param, max_budget, current_team, num_subs, include, exclude)
 
+        # check for optimisation error
+        if sim.prob.status != 1:
+            response = JsonResponse({
+                'error': 'Unable to find a feasible solution with the provided parameters. Please check and try again.'
+            })
+            response.status_code = 500
+            return response
+
         # save parameters of simulation for analytics
         u = Usage(
             session_type = 1 if 'username' in request.session else 0,
@@ -113,14 +121,6 @@ def receive_sim_form(request):
             exclude = ';'.join(exclude) if exclude else None,
         )
         u.save()
-
-        # check for optimisation error
-        if sim.prob.status != 1:
-            response = JsonResponse({
-                'error': 'Unable to find a feasible solution with the provided parameters. Please check and try again.'
-            })
-            response.status_code = 500
-            return response
 
         # extract results from optimisation and generate lineup
         optimal_team = sim.results
