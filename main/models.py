@@ -77,3 +77,55 @@ class Team(models.Model):
 
     def __str__(self):
         return self.team_name
+
+
+class Usage(models.Model):
+    
+    """
+    SESSION TYPE:
+        ID LOGIN
+        session_type = 0
+
+        CREDS LOGIN
+        session_type = 1
+
+    SIM TYPE:
+        TRANSFER
+        sim_type = 0
+        
+        WILDCARD
+        sim_type = 1
+
+        LINEUP
+        sim_type = 2
+    """
+
+    session_type = models.IntegerField()
+    user_id = models.IntegerField()
+    sim_type = models.IntegerField()
+    opt_param = models.CharField(max_length=64)
+    n_subs = models.IntegerField(blank=True, default=0)
+    include = models.CharField(blank=True, default='', max_length=1000)
+    exclude = models.CharField(blank=True, default='', max_length=1000)
+
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+
+        if self.sim_type == 0:
+            sim_type_text = 'Transfer Sim'
+        elif self.sim_type == 1:
+            sim_type_text = 'Wildcard Sim'
+        elif self.sim_type == 2:
+            sim_type_text = 'Lineup Sim'
+
+        if self.session_type == 0:
+            session_type_text = 'ID Session'
+        elif self.session_type == 1:
+            session_type_text = 'Credential Session'
+
+        return '{user} - {sim_type}, {session_type}'.format(
+            user=self.user_id,
+            sim_type=sim_type_text,
+            session_type=session_type_text
+            )

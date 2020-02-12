@@ -10,7 +10,7 @@ import requests
 from urllib.parse import urlparse, parse_qs
 
 from .opt import Opt
-from .models import Player, Team
+from .models import Player, Team, Usage
 from .forms import LoginCredsForm, LoginIdForm, WildcardForm, TransferForm, LineupForm
 from .fpl import PlayerTable, TeamTable
 from .lineup import Lineup
@@ -100,7 +100,19 @@ def receive_sim_form(request):
         current_lineup = prepare_team_for_template(current_lineup, opt_param)
 
         # run optimisation
+        print(request.session)
         sim = Opt(opt_param, max_budget, current_team, num_subs, include, exclude)
+
+        u = Usage(
+            session_type = 1 if 'username' in request.session else 0,
+            user_id = request.session['unique_id'],
+            sim_type = 0 if num_subs else 1,
+            opt_param = opt_param,
+            n_subs = num_subs if num_subs else None,
+            include = ';'.join(include) if len(include) > 0 else None,
+            exclude = ';'.join(exclude) if len(exclude) > 0 else None,
+        )
+        u.save()
 
         # check for optimisation error
         if sim.prob.status != 1:
@@ -297,6 +309,7 @@ def get_team_info_from_creds(request, username, password):
                 # return some sort of error
                 return None
 
+            request.session['unique_id'] = account_id
             team_info = get_team(session, account_id)
             bank_balance = get_bank_balance(session, account_id)
 
@@ -345,6 +358,9 @@ def _get_last_event_info(session, unique_id, event):
 
 def get_squad_from_id(request, unique_id):
     # 475068
+
+    request.session['unique_id'] = unique_id
+
     session = requests.Session()
     team_info = _get_team_info(session, unique_id)
     
