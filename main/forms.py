@@ -1,5 +1,7 @@
 from django import forms
 from .utils import OPT_PARAM_CHOICES
+from django.db.models.fields import BLANK_CHOICE_DASH
+
 
 class LoginIdForm(forms.Form):
     unique_id = forms.IntegerField(widget=forms.NumberInput(
@@ -49,13 +51,15 @@ class WildcardForm(forms.Form):
             'placeholder': 'Specify Maximum Budget'
         }
     ), initial=100.0)
-    parameter = forms.CharField(label='Select optimisation parameter', widget=forms.Select(
-        choices=OPT_PARAM_CHOICES,
+    
+    parameter = forms.ChoiceField(choices=BLANK_CHOICE_DASH + OPT_PARAM_CHOICES, widget=forms.Select(
         attrs={
             'id': 'opt-param',
             'class': 'form-control',
+
         }
-    ), initial='ep_next')
+    ))
+
     include = forms.CharField(widget=forms.TextInput(
         attrs={
             'class': 'form-control',
@@ -63,11 +67,12 @@ class WildcardForm(forms.Form):
             'placeholder': 'Players to include',
         }
     ), required=False)
+
     exclude = forms.CharField(widget=forms.TextInput(
         attrs={
             'class': 'form-control',
             'id': 'exclude',
-            'placeholder': 'Players to include',
+            'placeholder': 'Players to exclude',
         }
     ), required=False)
 
@@ -80,6 +85,7 @@ class TransferForm(forms.Form):
             'placeholder': 'Desired number of subs'
         }
     ), initial=1)
+    
     max_budget = forms.FloatField(widget=forms.NumberInput(
         attrs={
             'id': 'max-budget',
@@ -87,13 +93,15 @@ class TransferForm(forms.Form):
             'placeholder': 'Specify Maximum Budget'
         }
     ), initial=100.0)
-    parameter = forms.CharField(label='Select optimisation parameter', widget=forms.Select(
-        choices=OPT_PARAM_CHOICES,
+
+    parameter = forms.ChoiceField(choices=BLANK_CHOICE_DASH + OPT_PARAM_CHOICES, widget=forms.Select(
         attrs={
             'id': 'opt-param',
             'class': 'form-control',
+
         }
-    ), initial='ep_next')
+    ))
+
     include = forms.CharField(widget=forms.TextInput(
         attrs={
             'class': 'form-control',
@@ -101,10 +109,11 @@ class TransferForm(forms.Form):
             'placeholder': 'Players to include',
         }
     ), required=False)
+
     exclude = forms.CharField(widget=forms.TextInput(
         attrs={
             'class': 'form-control',
             'id': 'exclude',
-            'placeholder': 'Players to include',
+            'placeholder': 'Players to exclude',
         }
     ), required=False)
