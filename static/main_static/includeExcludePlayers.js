@@ -31,7 +31,12 @@ $(document).on('submit', '#post-form', function (e) {
             $("#current-team-section").html(response.current_squad_table);
         },
         error: function (data) {
-            alert(data.responseJSON.error + '\n\nError code: ' + data.status);
+            if (data.status == 500) {
+                alert(data.responseJSON.error + '\n\nError code: ' + data.status);
+            } 
+            else if (data.status == 401) {
+                location.reload();
+            }         
         }
     });
 });

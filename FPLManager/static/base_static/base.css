@@ -9,6 +9,19 @@ td, th {
   vertical-align: middle !important;
 }
 
+.custom-tooltip {
+  font-size: x-small;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: grey;
+  color: white;
+  border-radius: 100px;
+  border-style: solid;
+  border-color: darkgrey;
+  border-width: 2px;
+  cursor: pointer;
+}
+
 .icon-padding {
   display: inline;
   margin-left:10px;

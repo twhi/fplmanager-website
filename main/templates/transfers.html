@@ -89,4 +89,7 @@
 
 {% block scripts %}
 <script src="{% static 'main_static/includeExcludePlayers.js' %}"></script>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 {% endblock scripts %}

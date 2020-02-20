@@ -9,9 +9,14 @@ td, th {
   vertical-align: middle !important;
 }
 
+.custom-tooltip {
+  background-color: #0f0f0f;
+}
+
 .icon-padding {
-  padding-left:10px;
-  padding-right:10px;
+  display: inline;
+  margin-left:10px;
+  margin-right:10px;
 }
 
 .page-content {

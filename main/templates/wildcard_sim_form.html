@@ -18,7 +18,9 @@
     <div id="include-exclude">
         <div class="row">
             <div class="col-xl-4 col-md-4">
-                <p><b>Select players to include:</b></p>
+                <p><b>Select players to include <span class="custom-tooltip" data-toggle="tooltip" data-placement="top"
+                            title="Enter player names here to force them into your resulting squad. This is useful if you have a hunch that a player is going to have a good week, but they aren't appearing in your results. This section can also be used to force the solver to keep 'dead' players in your team which you don't need (or want) to get rid of.">?</span>:</b>
+                </p>
                 {{ wildcard_form.include }}
             </div>
 
@@ -32,7 +34,9 @@
 
         <div class="row">
             <div class="col-xl-4 col-md-4">
-                <p><b>Select players to exclude:</b></p>
+                <p><b>Select players to exclude <span class="custom-tooltip" data-toggle="tooltip" data-placement="top"
+                            title="Enter player names here to force them out of your results. For example, if you own a player that is injured and you specifically want to remove them from your team, then enter their name here to force them out of your squad. If the solver keeps on suggesting a player that you definitely don't want in your team, then enter their name here to force them out of the results.">?</span>:</b>
+                </p>
                 {{ wildcard_form.exclude }}
             </div>
 
