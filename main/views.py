@@ -84,6 +84,13 @@ def login_creds_ajax(request):
 
 def receive_sim_form(request):
 
+    if not request.session.session_key:
+        response = JsonResponse({
+                'error': 'This function requires you to be logged in.'
+            })
+        response.status_code = 401
+        return response
+
     if request.POST.get('action') == 'post' and request.is_ajax():
         # extract data from ajax request
         simulation_data = json.loads(request.POST.get('selected'))
