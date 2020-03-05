@@ -544,9 +544,9 @@ def update_teams():
 
 
 def landing(request):
-    # if request.method == 'POST':
-    #     if 'do-xg' in request.POST:
-    #         XgStats()
+    if request.method == 'POST':
+        if 'do-xg' in request.POST:
+            XgStats()
     
     context = {
         'homepage': 'active',
