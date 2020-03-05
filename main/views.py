@@ -9,6 +9,7 @@ import json
 import requests
 from urllib.parse import urlparse, parse_qs
 import operator
+import csv
 
 from .opt import Opt
 from .models import Player, Team, Usage
@@ -452,7 +453,6 @@ def refresh_team(request):
     else:
         print('refresh team error')
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
 
 @transaction.atomic
 def update_players():
