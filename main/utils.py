@@ -6,6 +6,7 @@ OPT_PARAM_CHOICES = [
     ('dreamteam_count', 'Dreamteam Count'),
     ('ep_next', 'xP (Next GW)'),
     ('ep_this', 'xP (Last GW)'),
+    ('xg_season', 'xG (Season)'),
     ('form', 'Form'),
     ('goals_scored', 'Goals Scored'),
     ('ict_index', 'ICT Index'),

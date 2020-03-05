@@ -1,8 +1,9 @@
 import requests
 import json
 import unidecode
-from .models import Player, Team
+from .models import Player, Team, XgLookup
 from .fplstatistics import FplStatistics
+from .xg import XgStats
 
 class PlayerTable:
     PLAYER_TABLE_URL = 'https://fantasy.premierleague.com/api/bootstrap-static/'
@@ -11,9 +12,14 @@ class PlayerTable:
         self.session = requests.Session()
 
         self.teams = Team.objects.all()
+        self.xg_lookup = XgLookup.objects.all()
 
         self.table = self.get_player_table()
         self.fpl_statistics = FplStatistics()
+        
+        # run this separately
+        # self.xg_data = XgStats()
+
         self.process_table()
 
     def get_player_table(self):
@@ -42,10 +48,23 @@ class PlayerTable:
         # gets price change data from fplstatistics.com
         self.get_price_change()
 
+        # gets top 50 data from fplsatistics.com
         self.get_top_50_count()
 
+        # gets KPI data from fplstatistics.com
         self.get_kpi()
 
+        self.get_xg()
+
+    def get_xg(self):
+        for p in self.table:
+            p['xg_season'] = 0
+            try:
+                xg_p = XgLookup.objects.get(player_id=p['id'])
+                p['xg_season'] = xg_p.xg_season
+            except:
+                print('unable to update player', p['web_name'])
+    
     def get_kpi(self):
         for p in self.table:
             p['kpi'] = 0

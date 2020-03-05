@@ -19,7 +19,7 @@
             {% endif %}
             <td>{{ player.name }} ({{ player.team_name_short }})</td>
             <td>{{ player.position }}</td>
-            <td>{{ player|getattribute:team.param }}</td>
+            <td>{{ player|getattribute:team.param|floatformat:1 }}</td>
         </tr>
         {% endfor %}
         <tr>
@@ -37,7 +37,7 @@
             {% endif %}
             <td>{{ player.name }} ({{ player.team_name_short }})</td>
             <td>{{ player.position }}</td>
-            <td>{{ player|getattribute:team.param }}</td>
+            <td>{{ player|getattribute:team.param|floatformat:1 }}</td>
         </tr>
         {% endfor %}
     </tbody>

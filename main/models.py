@@ -48,6 +48,7 @@ class Player(models.Model):
     value_season = models.FloatField(default=0.0)
     kpi = models.FloatField(default=0.0)
     price_change = models.FloatField(default=0.0)
+    xg_season = models.FloatField(default=0.0)
 
     updated = models.DateTimeField(auto_now=True)
 
@@ -136,3 +137,9 @@ class XgLookup(models.Model):
     xg_season = models.FloatField(default=0.0)
 
     updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{p_id} - {p_name}'.format(
+            p_id=self.player_id,
+            p_name=self.xg_name
+        )

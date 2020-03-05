@@ -17,6 +17,7 @@ from .forms import LoginCredsForm, LoginIdForm, WildcardForm, TransferForm, Line
 from .fpl import PlayerTable, TeamTable
 from .lineup import Lineup
 from .utils import OPT_PARAM_CHOICES
+from .xg import XgStats
 
 
 def prepare_team_for_template(lineup, param):
@@ -502,6 +503,7 @@ def update_players():
                 'kpi': float(p['kpi']),
                 'top_50_count': int(p['top_50_count']),
                 'price_change': float(p['price_change']),
+                'xg_season': float(p['xg_season']),
             }
         )
         try:
@@ -542,6 +544,10 @@ def update_teams():
 
 
 def landing(request):
+    if request.method == 'POST':
+        if 'do-xg' in request.POST:
+            XgStats()
+    
     context = {
         'homepage': 'active',
         'wildcard_form': WildcardForm(),
