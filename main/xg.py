@@ -11,8 +11,6 @@ class XgStats:
     def __init__(self):
         self.xg_lookup = XgLookup.objects.all()
 
-        # loop = asyncio.get_event_loop()
-
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         self.data = loop.run_until_complete(self.fetch_data())
@@ -41,18 +39,15 @@ class XgStats:
     
     async def fetch_data(self):
         async with aiohttp.ClientSession() as session:
+            
             understat = Understat(session)
             data = await understat.get_league_players('EPL', CURRENT_SEASON)
+            
             player_ids = [int(player['id']) for player in data]
             player_names = [player['player_name'].replace('&#039;', '\'') for player in data]
             players = {k: {'name': v} for k, v in dict(zip(player_ids, player_names)).items()}
-            count = 1
+
             for p_id, p_name in players.items():                             
-                print('Getting data for player {current} out of {total}'.format(
-                    current=count,
-                    total=len(players)
-                ))
-                count += 1
                 data = await understat.get_player_matches(p_id)
                 players[p_id]['games'] = data
 
