@@ -1,9 +1,7 @@
 from django.db import models
 
-
-# Create your models here.
 class Player(models.Model):
-    player_id = models.CharField(default=0, max_length=3)
+    player_id = models.IntegerField(default=0, primary_key=True)
     name = models.CharField(max_length=200)
     name_raw = models.CharField(default='', max_length=200)
     team_id = models.IntegerField(default=0)
@@ -129,3 +127,10 @@ class Usage(models.Model):
             sim_type=sim_type_text,
             session_type=session_type_text
             )
+
+
+class XgLookup(models.Model):
+    player_id = models.IntegerField(default=0, primary_key=True)
+    xg_name = models.CharField(default='')
+    xg_team = models.CharField(default='')
+    xg_season = models.FloatField(default=0.0)

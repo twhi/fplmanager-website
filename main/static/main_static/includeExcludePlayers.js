@@ -3,8 +3,8 @@ function getInfoFromPage() {
     var numSubs = $("#num-subs").val();
     var maxBudget = $("#max-budget").val();
     var optParam = $("#opt-param").val();
-    var include = $("#results-include .player-box").map(function () { return $(this).attr("data-id"); }).get();
-    var exclude = $("#results-exclude .player-box").map(function () { return $(this).attr("data-id"); }).get();
+    var include = $("#results-include .player-box").map(function () { return parseInt($(this).attr("data-id")); }).get();
+    var exclude = $("#results-exclude .player-box").map(function () { return parseInt($(this).attr("data-id")); }).get();
     var playerElements = {
         'num_subs': typeof numSubs == 'undefined' ? null : numSubs,
         'max_budget': maxBudget,

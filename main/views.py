@@ -99,10 +99,11 @@ def receive_sim_form(request):
         num_subs = simulation_data['num_subs']
         if num_subs:
             num_subs = float(num_subs)
+    
         include = simulation_data['include']
         exclude = simulation_data['exclude']
 
-        # get current team and lineup
+        # get current team and lineupp        
         current_team = request.session['current_team']
         current_lineup = request.session['current_lineup']
         current_lineup = prepare_team_for_template(current_lineup, opt_param)
@@ -125,8 +126,8 @@ def receive_sim_form(request):
             sim_type = 0 if num_subs else 1,
             opt_param = opt_param,
             n_subs = num_subs if num_subs else None,
-            include = ';'.join(include) if include else None,
-            exclude = ';'.join(exclude) if exclude else None,
+            include = ';'.join(str(i) for i in include) if include else None,
+            exclude = ';'.join(str(i) for i in exclude) if exclude else None,
         )
         u.save()
 
@@ -339,7 +340,7 @@ def get_team_info_from_creds(request, username, password):
             # look up player selling price by player_id and add to team list
             for player in team_qs:
                 player.opt_cost = next(
-                    (p['selling_price'] for p in team_info if str(p['element']) == player.player_id), None) / 10
+                    (p['selling_price'] for p in team_info if p['element'] == player.player_id), None) / 10
 
             # get total money available based on squad and bank balance
             squad_value = round(sum(p.opt_cost for p in team_qs), 1)

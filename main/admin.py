@@ -62,3 +62,8 @@ class TeamAdmin(NoLoggingMixin, admin.ModelAdmin, ExportCsvMixin):
 class UsageAdmin(NoLoggingMixin, admin.ModelAdmin, ExportCsvMixin):
     readonly_fields = ('updated',)
     actions = ['export_as_csv', 'export_delete_as_csv']
+
+@admin.register(XgLookup)
+class XgLookupAdmin(NoLoggingMixin, admin.ModelAdmin, ExportCsvMixin):
+    readonly_fields = ('updated',)
+    actions = ['export_as_csv']

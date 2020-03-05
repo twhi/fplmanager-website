@@ -35,6 +35,11 @@ class Lineup:
 
     def serialize_team(self, team_sorted):
         team_serialized = json.loads(serializers.serialize('json', team_sorted))
+        
+        # add player id into serialized team
+        for player in team_serialized:
+            player['fields']['player_id'] = player['pk']  
+
         return [pl['fields'] for pl in team_serialized]
 
     def sort_team_by_param(self, team):
