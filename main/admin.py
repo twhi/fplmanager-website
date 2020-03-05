@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.http import HttpResponse
 import csv
 
-from .models import Player, Team, Usage
+from .models import Player, Team, Usage, XgLookup
 
 
 class NoLoggingMixin:

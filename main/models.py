@@ -131,6 +131,8 @@ class Usage(models.Model):
 
 class XgLookup(models.Model):
     player_id = models.IntegerField(default=0, primary_key=True)
-    xg_name = models.CharField(default='')
-    xg_team = models.CharField(default='')
+    xg_name = models.CharField(default='', max_length=200)
+    xg_team = models.CharField(default='', max_length=200)
     xg_season = models.FloatField(default=0.0)
+
+    updated = models.DateTimeField(auto_now=True)
