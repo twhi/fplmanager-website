@@ -9,7 +9,6 @@ from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 
 CURRENT_SEASON = 2019
-PLAYER_TABLE_URL = 'https://fantasy.premierleague.com/api/bootstrap-static/'
 
 class XgStats:
 
@@ -37,14 +36,15 @@ class XgStats:
         found_player = next((item for item in fpl_player_table_trim if item["web_name"] == name), None)
 
         if not found_player:
-            found_player = next((item for item in fpl_player_table_trim if ' '.join(item["first_name"], item['second_name']) == name), None)
+            found_player = next((item for item in fpl_player_table_trim if ' '.join([item["first_name"], item['second_name']]) == name), None)
 
-        choice_one = process.extractOne(name, f_plus_s_dict.keys())
-        choice_two = process.extractOne(name, web_dict.keys())
-        if choice_one[1] > choice_two[1]:
-            return f_plus_s_dict[choice_one[0]], choice_one[1]
-        else:
-            return web_dict[choice_two[0]], choice_two[1]
+        if not found_player:
+            choice_one = process.extractOne(name, [' '.join([p["first_name"], p['second_name']]) for p in fpl_player_table_trim])
+            choice_two = process.extractOne(name, [p['web_name'] for p in fpl_player_table_trim])
+            if choice_one[1] > choice_two[1]:
+                found_player = next(p for p in fpl_player_table_trim if choice_one[1] == p['web_name'])
+            else:
+                found_player = next(p for p in fpl_player_table_trim if choice_two[1] == ' '.join([p["first_name"], p['second_name']]))
         p = 0
     
     @property
