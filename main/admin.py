@@ -68,8 +68,8 @@ class UploadCsvMixin:
     def import_csv(self, request):
 
         if request.method == 'POST':
+
             csv_file = TextIOWrapper(request.FILES['csv_file'].file, encoding=request.encoding)
-            
             extension = os.path.splitext(request.FILES['csv_file'].name)[1]
 
             if extension == '.csv':
@@ -79,24 +79,24 @@ class UploadCsvMixin:
 
                 model_fields = [m.name for m in self.model._meta.fields if m.name != 'updated']
 
-                if set(headers) == set(model_fields):
+                # if set(headers) == set(model_fields):
 
-                    input_data = [dict(zip(headers, row)) for row in reader]
+                input_data = [dict(zip(headers, row)) for row in reader]
 
-                    for i in input_data:
+                for i in input_data:
 
-                        t = self.model()
+                    t = self.model()
 
-                        [setattr(t, k, v) for k, v in i.items()]
+                    [setattr(t, k, v) for k, v in i.items()]
 
-                        t.save()
+                    t.save()
                         
-                else:
-                    self.message_user(request, "Bad headers - unable to import selected file. Expected headers: '{expected}' Received headers: '{actual}'".format(
-                        expected=model_fields,
-                        actual=headers
-                    ), level='ERROR')
-                    return redirect("..")
+                # else:
+                #     self.message_user(request, "Bad headers - unable to import selected file. Expected headers: '{expected}' Received headers: '{actual}'".format(
+                #         expected=model_fields,
+                #         actual=headers
+                #     ), level='ERROR')
+                #     return redirect("..")
             else:
                 self.message_user(request, 'Incorrect file type', level='ERROR')
                 return redirect('..')
