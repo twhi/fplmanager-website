@@ -5,8 +5,8 @@ from understat import Understat
 from .models import XgLookup
 import requests
 import json
-from fuzzywuzzy import fuzz
-from fuzzywuzzy import process
+from rapidfuzz import fuzz
+from rapidfuzz import process
 
 CURRENT_SEASON = 2019
 
