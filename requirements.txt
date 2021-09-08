@@ -27,7 +27,7 @@ kombu==4.6.6
 more-itertools==8.0.0
 multidict==4.7.5
 packaging==20.3
-Pillow==6.2.1
+Pillow==8.3.2
 pluggy==0.13.1
 psycopg2==2.8.3
 PuLP==1.6.10
